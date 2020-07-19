@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import TodoForm from "./components/TodoForm";
 import TodoList from "./components/TodoList"
+import TodoFooter from "./components/TodoFooter";
 
 import './App.css';
 
@@ -35,6 +36,7 @@ class App extends Component {
         <div className="todo-container">
           <TodoForm />
           <TodoList todos={todos} onToggleTodo={this.handleToggleTodo} />
+          <TodoFooter />
         </div>
       </div>
     )
