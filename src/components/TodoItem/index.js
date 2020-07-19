@@ -7,12 +7,19 @@ import editIcon from '../../assets/images/edit.svg';
 import deleteIcon from '../../assets/images/delete.svg';
 
 class TodoItem extends Component {
+  handleToggle = e => {
+    e.preventDefault();
+
+    const { onToggleTodo } = this.props;
+    onToggleTodo();
+  }
+
   render() {
     const { data: { content, completed } } = this.props;
 
     return (
       <div className="todo-item-container">
-        <a href="#" className="todo-item-toggle">
+        <a href="#" className="todo-item-toggle" onClick={this.handleToggle}>
           {completed && <img src={greenTickIcon} alt="tick" />}
           {!completed && <img src={blackTickIcon} alt="tick" />}
         </a>

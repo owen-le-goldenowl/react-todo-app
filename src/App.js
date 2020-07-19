@@ -19,6 +19,14 @@ class App extends Component {
     }
   }
 
+  handleToggleTodo = id => {
+    const { todos: oldTodos } = this.state;
+    const newTodos = oldTodos.map(todo =>
+      todo.id === id ? { ...todo, completed: !todo.completed } : todo
+    );
+    this.setState({ todos: newTodos });
+  }
+
   render() {
     const { todos } = this.state;
 
@@ -26,7 +34,7 @@ class App extends Component {
       <div className="app-container" >
         <div className="todo-container">
           <TodoForm />
-          <TodoList todos={todos} />
+          <TodoList todos={todos} onToggleTodo={this.handleToggleTodo} />
         </div>
       </div>
     )

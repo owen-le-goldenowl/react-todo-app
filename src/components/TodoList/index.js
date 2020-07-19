@@ -6,13 +6,13 @@ import "./index.css";
 
 class TodoList extends Component {
   render() {
-    const { todos } = this.props;
+    const { todos, onToggleTodo } = this.props;
 
     return (
       <div className="todo-list-container">
         {
           todos.map(todo => (
-            <TodoItem data={todo} key={todo.id} />
+            <TodoItem data={todo} key={todo.id} onToggleTodo={() => onToggleTodo(todo.id)} />
           ))
         }
       </div>
