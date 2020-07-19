@@ -17,12 +17,26 @@ class TodoForm extends Component {
     });
   };
 
+  handleSubmit = e => {
+    const { onCreateTodo } = this.props;
+    const { content } = this.state;
+
+    onCreateTodo(content);
+    this.clearContent();
+  }
+
+  clearContent = () => {
+    this.setState({
+      content: ''
+    })
+  }
+
   render() {
     const { content } = this.state;
 
     return (
       <div className="todo-form-container">
-        <form >
+        <form onSubmit={this.handleSubmit}>
           <input
             type="text"
             value={content}

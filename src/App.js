@@ -28,13 +28,26 @@ class App extends Component {
     this.setState({ todos: newTodos });
   }
 
+  handleCreateTodo = content => {
+    const { todos: oldTodos } = this.state;
+    const newTodo = {
+      id: (new Date()).getTime(),
+      completed: false,
+      content,
+    }
+
+    this.setState({
+      todos: [...oldTodos, newTodo]
+    })
+  }
+
   render() {
     const { todos } = this.state;
 
     return (
       <div className="app-container" >
         <div className="todo-container">
-          <TodoForm />
+          <TodoForm onCreateTodo={this.handleCreateTodo} />
           <TodoList todos={todos} onToggleTodo={this.handleToggleTodo} />
           <TodoFooter />
         </div>
