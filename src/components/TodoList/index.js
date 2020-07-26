@@ -15,6 +15,11 @@ class TodoList extends Component {
             <TodoItem data={todo} key={todo.id} onToggleTodo={() => onToggleTodo(todo.id)} />
           ))
         }
+        {
+          todos.length === 0 && (
+            <div className="no-todo">No todos</div>
+          )
+        }
       </div>
     )
   }

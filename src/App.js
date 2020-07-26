@@ -4,19 +4,18 @@ import TodoForm from "./components/TodoForm";
 import TodoList from "./components/TodoList"
 import TodoFooter from "./components/TodoFooter";
 
+import { fetchTodosFromLocalStorage, saveTodosToLocalStorage } from "./utils/localTodos";
+
 import './App.css';
 
-const fakeTodos = [
-  { id: 1, content: 'Learn ruby', completed: true },
-  { id: 2, content: 'Learn react', completed: false },
-];
+const localTodos = fetchTodosFromLocalStorage();
 
 class App extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      todos: fakeTodos,
+      todos: localTodos,
     }
   }
 
@@ -25,7 +24,8 @@ class App extends Component {
     const newTodos = oldTodos.map(todo =>
       todo.id === id ? { ...todo, completed: !todo.completed } : todo
     );
-    this.setState({ todos: newTodos });
+    saveTodosToLocalStorage(newTodos)
+    this.setState({ todos: newTodos })
   }
 
   handleCreateTodo = content => {
@@ -36,13 +36,13 @@ class App extends Component {
       content,
     }
 
-    this.setState({
-      todos: [...oldTodos, newTodo]
-    })
+    const todos = [...oldTodos, newTodo]
+    saveTodosToLocalStorage(todos)
   }
 
   render() {
     const { todos } = this.state;
+    console.log(todos)
 
     return (
       <div className="app-container" >
