@@ -73,7 +73,7 @@ class TodoItem extends Component {
           {!completed && <img src={blackTickIcon} alt="tick" />}
         </a>
 
-        {!editMode && (<div className={`todo-item-content ${completed} ? 'completed' : 'incompleted'`} >
+        {!editMode && (<div className={`todo-item-content ${completed ? 'completed' : 'incompleted'} `} >
           {content}
         </div>)}
 

@@ -19,6 +19,7 @@ class App extends Component {
 
     this.state = {
       todos: localTodos,
+      visibilityFilter: 'all',
     }
   }
 
@@ -63,16 +64,44 @@ class App extends Component {
     this.setState({ todos: newTodos })
   }
 
-  render() {
+  handleChangeFilter = targetFilter => {
+    this.setState({ visibilityFilter: targetFilter })
+  }
+
+  getTodosByFilter = () => {
+    const { todos, visibilityFilter } = this.state;
+    switch (visibilityFilter) {
+      case 'all':
+        return todos;
+      case 'active':
+        return todos.filter(({ completed }) => !completed);
+      case 'completed':
+        return todos.filter(({ completed }) => completed);
+      default:
+        return todos;
+    }
+  }
+
+  getIncompleteTodoCount = () => {
     const { todos } = this.state;
-    console.log(todos)
+    return todos.filter(({ completed }) => !completed).length;
+  }
+
+  render() {
+    const todos = this.getTodosByFilter();
+    const incompletedTodosCount = this.getIncompleteTodoCount();
+    const { visibilityFilter } = this.state;
 
     return (
       <div className="app-container" >
         <div className="todo-container">
           <TodoForm onCreateTodo={this.handleCreateTodo} />
           <TodoList todos={todos} onToggleTodo={this.handleToggleTodo} onDeleteTodo={this.hadleDeleteTodo} onUpdateTodo={this.handleUpdateTodo} />
-          <TodoFooter />
+          <TodoFooter
+            activeFilter={visibilityFilter}
+            onChangeFilter={this.handleChangeFilter}
+            incompletedTodosCount={incompletedTodosCount}
+          />
         </div>
       </div>
     )
