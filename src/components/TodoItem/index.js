@@ -14,6 +14,12 @@ class TodoItem extends Component {
     onToggleTodo();
   }
 
+  handleDelete = e => {
+    e.preventDefault();
+    const { onDeleteTodo } = this.props;
+    onDeleteTodo();
+  }
+
   render() {
     const { data: { content, completed } } = this.props;
 
@@ -32,7 +38,7 @@ class TodoItem extends Component {
           <a href="#" className="icon-btn">
             <img src={editIcon} alt="edit" />
           </a>
-          <a href="#" className="icon-btn">
+          <a href="#" className="icon-btn" onClick={this.handleDelete}>
             <img src={deleteIcon} alt="remove" />
           </a>
         </div>

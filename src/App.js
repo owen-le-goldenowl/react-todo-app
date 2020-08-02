@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { v4 as uuidv4 } from "uuid"
 
 import TodoForm from "./components/TodoForm";
 import TodoList from "./components/TodoList"
@@ -31,13 +32,21 @@ class App extends Component {
   handleCreateTodo = content => {
     const { todos: oldTodos } = this.state;
     const newTodo = {
-      id: (new Date()).getTime(),
+      id: uuidv4(),
       completed: false,
       content,
     }
 
     const todos = [...oldTodos, newTodo]
     saveTodosToLocalStorage(todos)
+    this.setState({ todos })
+  }
+
+  hadleDeleteTodo = id => {
+    const { todos: oldTodos } = this.state;
+    const newTodos = oldTodos.filter(todo => todo.id !== id)
+    saveTodosToLocalStorage(newTodos)
+    this.setState({ todos: newTodos })
   }
 
   render() {
@@ -48,7 +57,7 @@ class App extends Component {
       <div className="app-container" >
         <div className="todo-container">
           <TodoForm onCreateTodo={this.handleCreateTodo} />
-          <TodoList todos={todos} onToggleTodo={this.handleToggleTodo} />
+          <TodoList todos={todos} onToggleTodo={this.handleToggleTodo} onDeleteTodo={this.hadleDeleteTodo} />
           <TodoFooter />
         </div>
       </div>
