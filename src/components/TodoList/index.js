@@ -6,13 +6,19 @@ import "./index.css";
 
 class TodoList extends Component {
   render() {
-    const { todos, onToggleTodo, onDeleteTodo } = this.props;
+    const { todos, onToggleTodo, onDeleteTodo, onUpdateTodo } = this.props;
 
     return (
       <div className="todo-list-container">
         {
           todos.map(todo => (
-            <TodoItem data={todo} key={todo.id} onToggleTodo={() => onToggleTodo(todo.id)} onDeleteTodo={(() => { onDeleteTodo(todo.id) })} />
+            <TodoItem
+              data={todo}
+              key={todo.id}
+              onToggleTodo={() => onToggleTodo(todo.id)}
+              onDeleteTodo={(() => { onDeleteTodo(todo.id) })}
+              onUpdateTodo={attributes => { onUpdateTodo(todo.id, attributes) }}
+            />
           ))
         }
         {

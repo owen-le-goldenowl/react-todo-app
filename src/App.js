@@ -10,6 +10,8 @@ import { fetchTodosFromLocalStorage, saveTodosToLocalStorage } from "./utils/loc
 import './App.css';
 
 const localTodos = fetchTodosFromLocalStorage();
+const getCurrentTime = () => (new Date()).getTime();
+
 
 class App extends Component {
   constructor(props) {
@@ -31,15 +33,27 @@ class App extends Component {
 
   handleCreateTodo = content => {
     const { todos: oldTodos } = this.state;
+    const now = getCurrentTime();
     const newTodo = {
       id: uuidv4(),
       completed: false,
       content,
+      createdAt: now,
+      updatedAt: now
     }
 
     const todos = [...oldTodos, newTodo]
     saveTodosToLocalStorage(todos)
     this.setState({ todos })
+  }
+
+  handleUpdateTodo = (id, attributes) => {
+    const { todos: oldTodos } = this.state;
+    const newTodos = oldTodos.map(todo =>
+      todo.id === id ? { ...todo, ...attributes, updatedAt: getCurrentTime() } : todo
+    )
+    saveTodosToLocalStorage(newTodos)
+    this.setState({ todos: newTodos })
   }
 
   hadleDeleteTodo = id => {
@@ -57,7 +71,7 @@ class App extends Component {
       <div className="app-container" >
         <div className="todo-container">
           <TodoForm onCreateTodo={this.handleCreateTodo} />
-          <TodoList todos={todos} onToggleTodo={this.handleToggleTodo} onDeleteTodo={this.hadleDeleteTodo} />
+          <TodoList todos={todos} onToggleTodo={this.handleToggleTodo} onDeleteTodo={this.hadleDeleteTodo} onUpdateTodo={this.handleUpdateTodo} />
           <TodoFooter />
         </div>
       </div>
