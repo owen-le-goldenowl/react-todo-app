@@ -5,30 +5,17 @@ import TodoForm from "../../components/TodoForm";
 import TodoList from "../../components/TodoList"
 import TodoFooter from "../../components/TodoFooter";
 import { filterTodos, getIncompleteTodoCount } from "../../utils/todoUtils"
+import { createTodo } from "../../actions/todoActions"
 
 import "./index.css";
 
 class TodosContainer extends Component {
-  handleToggleTodo = id => {
-    // const { todos: oldTodos } = this.state;
-    // const newTodos = oldTodos.map(todo =>
-    //   todo.id === id ? { ...todo, completed: !todo.completed } : todo
-    // );
-    // saveTodosToLocalStorage(newTodos)
-    // this.setState({ todos: newTodos })
-    return ''
+  handleToggleTodo = content => {
   }
 
   handleCreateTodo = content => {
-    // const { todos: oldTodos } = this.state;
-    // const now = getCurrentTime();
-    // const newTodo = {
-    //   id: uuidv4(),
-    //   completed: false,
-    //   content,
-    //   createdAt: now,
-    //   updatedAt: now
-    return ''
+    const { createTodo } = this.props;
+    createTodo(content);
   }
 
 
@@ -92,4 +79,8 @@ const mapStateToProps = ({ todos }) => {
   }
 }
 
-export default connect(mapStateToProps)(TodosContainer);
+const mapDispatchToProps = {
+  createTodo
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TodosContainer);

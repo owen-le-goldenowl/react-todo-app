@@ -1,4 +1,4 @@
-import { CREATE_TODO, UPDATE_TODO, DELETE_TODO, CHANGE_TODO_FILTER, CLEAR_COMPLETED_TODO } from "../constants/todoConstants";
+import { CREATE_TODO } from "../constants/todoConstants";
 import { fetchTodosFromLocalStorage } from "../utils/todoUtils"
 
 const initialState = {
