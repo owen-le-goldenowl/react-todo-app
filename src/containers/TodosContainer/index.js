@@ -5,28 +5,19 @@ import TodoForm from "../../components/TodoForm";
 import TodoList from "../../components/TodoList"
 import TodoFooter from "../../components/TodoFooter";
 import { filterTodos, getIncompleteTodoCount } from "../../utils/todoUtils"
-import { createTodo, deleteTodo } from "../../actions/todoActions"
+import { createTodo, deleteTodo, updateTodo } from "../../actions/todoActions"
 
 import "./index.css";
 
 class TodosContainer extends Component {
-  handleToggleTodo = content => {
-  }
-
   handleCreateTodo = content => {
     const { createTodo } = this.props;
     createTodo(content);
   }
 
-
   handleUpdateTodo = (id, attributes) => {
-    // const { todos: oldTodos } = this.state;
-    // const newTodos = oldTodos.map(todo =>
-    //   todo.id === id ? { ...todo, ...attributes, updatedAt: getCurrentTime() } : todo
-    // )
-    // saveTodosToLocalStorage(newTodos)
-    // this.setState({ todos: newTodos })
-    return ''
+    const { updateTodo } = this.props;
+    updateTodo(id, attributes);
   }
 
   hadleDeleteTodo = id => {
@@ -41,7 +32,7 @@ class TodosContainer extends Component {
       <div className="app-container" >
         <div className="todo-container">
           <TodoForm onCreateTodo={this.handleCreateTodo} />
-          <TodoList todos={todos} onToggleTodo={this.handleToggleTodo} onDeleteTodo={this.hadleDeleteTodo} onUpdateTodo={this.handleUpdateTodo} />
+          <TodoList todos={todos} onDeleteTodo={this.hadleDeleteTodo} onUpdateTodo={this.handleUpdateTodo} />
           <TodoFooter
             activeFilter={visibilityFilter}
             onChangeFilter={this.handleChangeFilter}
@@ -69,7 +60,8 @@ const mapStateToProps = ({ todos }) => {
 
 const mapDispatchToProps = {
   createTodo,
-  deleteTodo
+  deleteTodo,
+  updateTodo
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(TodosContainer);

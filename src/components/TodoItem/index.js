@@ -33,8 +33,8 @@ class TodoItem extends Component {
   handleToggle = e => {
     e.preventDefault();
 
-    const { onToggleTodo } = this.props;
-    onToggleTodo();
+    const { onUpdateTodo, data: { completed } } = this.props;
+    onUpdateTodo({ completed: !completed });
   }
 
   handleDelete = e => {

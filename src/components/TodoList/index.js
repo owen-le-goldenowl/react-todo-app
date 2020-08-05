@@ -15,7 +15,6 @@ class TodoList extends Component {
             <TodoItem
               data={todo}
               key={todo.id}
-              onToggleTodo={() => onToggleTodo(todo.id)}
               onDeleteTodo={(() => { onDeleteTodo(todo.id) })}
               onUpdateTodo={attributes => { onUpdateTodo(todo.id, attributes) }}
             />
