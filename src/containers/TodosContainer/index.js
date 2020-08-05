@@ -5,7 +5,7 @@ import TodoForm from "../../components/TodoForm";
 import TodoList from "../../components/TodoList"
 import TodoFooter from "../../components/TodoFooter";
 import { filterTodos, getIncompleteTodoCount } from "../../utils/todoUtils"
-import { createTodo } from "../../actions/todoActions"
+import { createTodo, deleteTodo } from "../../actions/todoActions"
 
 import "./index.css";
 
@@ -30,21 +30,9 @@ class TodosContainer extends Component {
   }
 
   hadleDeleteTodo = id => {
-    // const { todos: oldTodos } = this.state;
-    //   const newTodos = oldTodos.filter(todo => todo.id !== id)
-    //   saveTodosToLocalStorage(newTodos)
-    //   this.setState({ todos: newTodos })
-    // }
-
-    // handleChangeFilter = targetFilter => {
-    //   this.setState({ visibilityFilter: targetFilter })
-    return ''
+    const { deleteTodo } = this.props;
+    deleteTodo(id)
   }
-
-
-
-
-
 
   render() {
     const { todos, filter: visibilityFilter, incompletedCount: incompletedTodosCount } = this.props;
@@ -80,7 +68,8 @@ const mapStateToProps = ({ todos }) => {
 }
 
 const mapDispatchToProps = {
-  createTodo
+  createTodo,
+  deleteTodo
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(TodosContainer);
