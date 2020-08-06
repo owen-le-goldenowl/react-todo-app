@@ -19,7 +19,6 @@ class TodoItem extends Component {
 
   static getDerivedStateFromProps(props, state) {
     const { data: { content, updatedAt } } = props;
-
     if (state.previousUpdatedAt !== updatedAt) {
       return {
         editContent: content,

@@ -7,8 +7,8 @@ export const createTodoInstance = content => {
   return {
     id: uuidv4(),
     completed: false,
-    created_at: now,
-    updated_at: now,
+    createdAt: now,
+    updatedAt: now,
     content
   }
 }
