@@ -1,4 +1,4 @@
-import { CREATE_TODO, DELETE_TODO, UPDATE_TODO, CHANGE_TODO_FILTER } from "../constants/todoConstants";
+import { CREATE_TODO, DELETE_TODO, UPDATE_TODO, CHANGE_TODO_FILTER, CLEAR_COMPLETED_TODOS } from "../constants/todoConstants";
 import { createTodoInstance } from "../utils/todoUtils";
 
 export const createTodo = content => dispatch => {
@@ -11,12 +11,16 @@ export const deleteTodo = id => dispatch => {
 };
 
 export const updateTodo = (id, attributes) => dispatch => {
-  dispatch(updateTodoDispatchRequest(id, attributes))
-}
+  dispatch(updateTodoDispatchRequest(id, attributes));
+};
 
 export const changeFilter = filter => dispatch => {
-  dispatch(changeFilterDispatchRequest(filter))
-}
+  dispatch(changeFilterDispatchRequest(filter));
+};
+
+export const clearCompletedTodos = () => dispatch => {
+  dispatch(clearCompletedTodosDispatchRequest());
+};
 
 export const createTodoDispatchRequest = todo => ({
   type: CREATE_TODO,
@@ -36,4 +40,9 @@ export const updateTodoDispatchRequest = (id, attributes) => ({
 export const changeFilterDispatchRequest = filter => ({
   type: CHANGE_TODO_FILTER,
   payload: { filter }
+})
+
+export const clearCompletedTodosDispatchRequest = () => ({
+  type: CLEAR_COMPLETED_TODOS,
+  payload: {}
 })

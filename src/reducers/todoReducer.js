@@ -1,4 +1,4 @@
-import { CREATE_TODO, DELETE_TODO, UPDATE_TODO, CHANGE_TODO_FILTER } from "../constants/todoConstants";
+import { CREATE_TODO, DELETE_TODO, UPDATE_TODO, CHANGE_TODO_FILTER, CLEAR_COMPLETED_TODOS } from "../constants/todoConstants";
 import { fetchTodosFromLocalStorage } from "../utils/todoUtils"
 
 const initialState = {
@@ -29,6 +29,10 @@ const todoReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         filter: payload.filter
+      }
+    case CLEAR_COMPLETED_TODOS:
+      return {
+        ...state, items: state.items.filter(({ completed }) => !completed)
       }
     default:
       return state;

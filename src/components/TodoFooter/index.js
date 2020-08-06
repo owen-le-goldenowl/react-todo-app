@@ -4,7 +4,7 @@ import "./index.css";
 
 class TodoFooter extends Component {
   render() {
-    const { onChangeFilter, activeFilter, incompletedTodosCount } = this.props;
+    const { onChangeFilter, activeFilter, incompletedTodosCount, clearCompletedTodos } = this.props;
 
     return (
       <div className="todo-footer-container">
@@ -35,6 +35,9 @@ class TodoFooter extends Component {
           >
             Complete
           </a>
+        </div>
+        <div className="todo-actions">
+          <button className="delete-completed-todos-btn" onClick={() => { clearCompletedTodos() }}>Clear completed todos</button>
         </div>
       </div>
     )
