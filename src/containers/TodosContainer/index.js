@@ -5,7 +5,7 @@ import TodoForm from "../../components/TodoForm";
 import TodoList from "../../components/TodoList"
 import TodoFooter from "../../components/TodoFooter";
 import { filterTodos, getIncompleteTodoCount } from "../../utils/todoUtils"
-import { createTodo, deleteTodo, updateTodo } from "../../actions/todoActions"
+import { createTodo, deleteTodo, updateTodo, changeFilter } from "../../actions/todoActions"
 
 import "./index.css";
 
@@ -22,7 +22,12 @@ class TodosContainer extends Component {
 
   hadleDeleteTodo = id => {
     const { deleteTodo } = this.props;
-    deleteTodo(id)
+    deleteTodo(id);
+  }
+
+  handleChangeFilter = filter => {
+    const { changeFilter } = this.props;
+    changeFilter(filter);
   }
 
   render() {
@@ -61,7 +66,8 @@ const mapStateToProps = ({ todos }) => {
 const mapDispatchToProps = {
   createTodo,
   deleteTodo,
-  updateTodo
+  updateTodo,
+  changeFilter
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(TodosContainer);

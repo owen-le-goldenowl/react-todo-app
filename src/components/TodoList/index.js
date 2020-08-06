@@ -6,7 +6,7 @@ import "./index.css";
 
 class TodoList extends Component {
   render() {
-    const { todos, onToggleTodo, onDeleteTodo, onUpdateTodo } = this.props;
+    const { todos, onDeleteTodo, onUpdateTodo } = this.props;
 
     return (
       <div className="todo-list-container">
